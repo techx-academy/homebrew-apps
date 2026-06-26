@@ -12,10 +12,12 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v5
+      - name: Tap local checkout
+        run: brew tap techx-academy/matrix "$GITHUB_WORKSPACE"
       - name: Audit cask
-        run: brew audit --cask --online Casks/matrix.rb
+        run: brew audit --cask --online techx-academy/matrix/matrix
       - name: Install cask
-        run: brew install --cask --no-quarantine Casks/matrix.rb
+        run: brew install --cask --no-quarantine techx-academy/matrix/matrix
       - name: Verify installed app
         run: |
           test -d "/Applications/Matrix.app"
