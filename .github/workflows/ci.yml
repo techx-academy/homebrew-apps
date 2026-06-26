@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Audit cask
+        run: brew audit --cask --online Casks/matrix.rb
+      - name: Install cask
+        run: brew install --cask --no-quarantine Casks/matrix.rb
+      - name: Verify installed app
+        run: |
+          test -d "/Applications/Matrix.app"
+          /usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "/Applications/Matrix.app/Contents/Info.plist"
+          /usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "/Applications/Matrix.app/Contents/Info.plist"
+      - name: Uninstall cask
+        if: always()
+        run: brew uninstall --cask matrix || true
