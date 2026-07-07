@@ -1,6 +1,6 @@
 cask "matrix" do
-  version "1.0.3"
-  sha256 "5bcff12f515542537a0ec8bfa8be3a07f1d01897b08936ee88de56a6e26ff2ff"
+  version "1.0.4"
+  sha256 "82e596a8294eefa76e4b84a27035f2924b3166319a257e1219e98d28fad2f019"
 
   url "https://download.matrix.build/mac/#{version}/Matrix-#{version}-arm64.dmg"
   name "Matrix"
